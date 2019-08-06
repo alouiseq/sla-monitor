@@ -1,0 +1,181 @@
+/* line 1, main.scss */
+body {
+  background-color: rgba(234, 234, 227, 0.57);
+}
+
+/* line 5, main.scss */
+body.dark {
+  background-color: #2b2b2b;
+  color: #fff;
+}
+/* line 11, main.scss */
+body.dark .d3-projects svg path {
+  fill: #fff;
+}
+/* line 14, main.scss */
+body.dark .d3-projects svg text {
+  fill: #fff;
+}
+/* line 19, main.scss */
+body.dark .d3-projects .brand-status {
+  border: 1px solid #fff;
+}
+
+/* line 25, main.scss */
+.dropdown {
+  z-index: 9999;
+}
+
+/* line 29, main.scss */
+.d3-projects {
+  margin-left: 4px;
+  padding-bottom: 50px;
+}
+/* line 40, main.scss */
+.d3-projects .title {
+  text-align: center;
+  margin-bottom: 0;
+}
+/* line 44, main.scss */
+.d3-projects .brand-title {
+  text-align: center;
+  margin-top: -35px;
+  margin-bottom: 20px;
+}
+/* line 50, main.scss */
+.d3-projects .sub-title {
+  text-align: center;
+}
+/* line 54, main.scss */
+.d3-projects .wrapper {
+  height: 100%;
+}
+/* line 59, main.scss */
+.d3-projects .client-metrics div, .d3-projects .e-to-e div {
+  display: inline-block;
+  margin-left: 5px;
+}
+/* line 65, main.scss */
+.d3-projects .brands {
+  margin-top: 25px;
+}
+/* line 69, main.scss */
+.d3-projects .brand-status {
+  display: inline-block;
+  border: 1px solid #000;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+/* line 77, main.scss */
+.d3-projects .up {
+  background-color: green;
+}
+/* line 81, main.scss */
+.d3-projects .down {
+  background-color: red;
+}
+
+/* Graph Cycle Animation */
+/* line 88, main.scss */
+.d3-projects.animate .app-metrics {
+  position: relative;
+}
+/* line 93, main.scss */
+.d3-projects.animate .load-time {
+  position: relative;
+}
+/* line 98, main.scss */
+.d3-projects.animate .brands {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+/* line 107, main.scss */
+.d3-projects.animate .e-to-e {
+  position: absolute;
+  opacity: 1;
+}
+/* line 112, main.scss */
+.d3-projects.animate .client-metrics {
+  position: absolute;
+  opacity: 1;
+}
+/* line 117, main.scss */
+.d3-projects.animate .loadtime-graphs {
+  position: absolute;
+  opacity: 1;
+}
+/* line 130, main.scss */
+.d3-projects.animate .e-to-e:nth-child(1) {
+  animation: eefade 20s 0s infinite;
+}
+/* line 134, main.scss */
+.d3-projects.animate .e-to-e:nth-child(2) {
+  animation: eefade 20s 10s infinite;
+}
+/* line 138, main.scss */
+.d3-projects.animate .brands-data:nth-child(1) .client-metrics:nth-child(1) {
+  animation: eefade 20s 0s infinite;
+}
+/* line 143, main.scss */
+.d3-projects.animate .brands-data:nth-child(1) .client-metrics:nth-child(2) {
+  animation: xfade 20s 5s infinite;
+}
+/* line 147, main.scss */
+.d3-projects.animate .brands-data:nth-child(2) .client-metrics:nth-child(1) {
+  animation: xfade 20s 10s infinite;
+}
+/* line 151, main.scss */
+.d3-projects.animate .brands-data:nth-child(2) .client-metrics:nth-child(2) {
+  animation: xfade 20s 15s infinite;
+}
+/* line 155, main.scss */
+.d3-projects.animate .time-graph:nth-child(1) .loadtime-graphs:nth-child(1) {
+  animation: eefade 20s 0s infinite;
+}
+/* line 160, main.scss */
+.d3-projects.animate .time-graph:nth-child(1) .loadtime-graphs:nth-child(2) {
+  animation: xfade 20s 5s infinite;
+}
+/* line 164, main.scss */
+.d3-projects.animate .time-graph:nth-child(2) .loadtime-graphs:nth-child(1) {
+  animation: xfade 20s 10s infinite;
+}
+/* line 168, main.scss */
+.d3-projects.animate .time-graph:nth-child(2) .loadtime-graphs:nth-child(2) {
+  animation: xfade 20s 15s infinite;
+}
+@keyframes eefade {
+  20% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+}
+@keyframes xfade {
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

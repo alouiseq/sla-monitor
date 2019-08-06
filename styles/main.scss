@@ -1,0 +1,802 @@
+@mixin ref {
+    color: #000;
+    position: absolute;
+    top: -55px;
+    right: 0px;
+
+    h6 {
+        margin: 2px;
+    }
+    .thresholds {
+        color: orange;
+    }
+    .green {
+        color: green;
+    }
+    .red {
+        color: red;
+    }
+}
+
+body {
+    background-color: #f3f3ef;
+    overflow: visible;
+
+    .pointer {
+        cursor: pointer;
+    }
+
+    .reference {
+        @include ref;
+    }
+
+    // Tooltip for x-labels on mouseover
+    div.tooltip {
+        position: absolute;
+        text-align: left;
+        width: 91px;
+        height: 36px;
+        padding: 5px;
+        font: 12px sans-serif;
+        background: lightsteelblue;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+
+    .no-data {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+body.dark {
+    background-color: #2b2b2b;
+    color: #fff;
+
+    .d3-projects {   
+        svg {
+            // path {
+            //     fill: #fff;
+            // }
+            text {
+                fill: #fff;
+            }
+        }
+
+        .brand-status {
+            border: 1px solid #fff;
+        }
+
+        .loader.fresh {
+            margin-top: 38px;
+        }
+
+        // .loader.fresh.graph-set-1 {
+        //     margin-top: 300px;
+        // }
+
+        // .loader.fresh.graph-set-2 {
+        //     margin-top: 600px;
+        // }
+        
+        .loader.cached {
+            margin-top: 20px;
+        }
+
+        .loader.cached.graph-set-1 {
+            margin-top: 300px + 20px;
+        }
+
+        .loader.cached.graph-set-2 {
+            margin-top: 600px + 20px;
+        }
+    }
+
+    .reference {
+        @include ref;
+        color: aquamarine;
+    }
+    
+    .config-title {
+        color: #fff !important;
+    }
+}
+
+
+/*** Graphs page ***/
+
+section#slam-graphs {
+
+    .loading-wrapper {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .d3-projects {   
+        margin-left: 3px;
+        padding-bottom: 50px;
+
+        @mixin rotateVendors($deg) {
+            -webkit-transform: rotate($deg);
+            -moz-transform: rotate($deg);
+            -ms-transform: rotate($deg);
+            -o-transform: rotate($deg);
+            transform: rotate($deg);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 0;
+            position: relative;           
+        }
+
+        .title-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -72px;
+            text-align: center;
+
+            .sub-label {
+                font-size: 30px;
+                color: #ffebcd;
+            }
+        }
+
+        .brand-title {
+            text-align: center;
+            margin-top: -35px;
+            margin-bottom: 20px;
+        }
+
+        // .brand-title2 {
+        //     text-align: center;
+        //     margin-top: -55px;
+        //     margin-bottom: 20px;
+        // }
+
+        .sub-title {
+            text-align: center;
+        }   
+
+        .client-metrics, .e-to-e {
+            div {
+                display: inline-block;
+                margin-left: 5px;
+            }
+        }                
+
+        .brands {
+            margin-top: 25px;
+        }
+
+        .brand-status {
+            display: inline-block;
+            border: 1px solid #000;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .up {
+            background-color :green;            
+        }
+
+        .down {
+            background-color: red;
+        }
+
+        @mixin slider {
+            position: absolute;
+            top: 50px;
+            z-index: 999;
+        }
+
+        .slider-stale {
+            @include slider;
+            right: 10px;
+        }
+
+        .slider-fresh {
+            @include slider;
+            right: 40px;
+        }        
+    }
+
+
+    /* Graph Cycle Animation */
+    $initState: 0;
+
+    .d3-projects.animate {
+        .app-metrics {
+            position: relative;
+            // top: 185px;
+        }           
+
+        .load-time {
+            position: relative;
+            // top: 375px;
+        }   
+
+        .brands {
+            // position: relative;
+            // top: 621px;
+            // top: 725px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }     
+
+        // .brands-data, .time-graph {
+        //     opacity: $initState;
+        // }
+
+        .brand-title, .brand-title2 {
+            opacity: $initState;
+        }
+
+        .e-to-e {
+            position: absolute;
+            opacity: 1;
+        }
+
+        .client-metrics {
+            position: absolute;
+            opacity: $initState;
+        }  
+
+        .time-graph {
+            margin-left: 10px;
+        }
+
+        .loadtime-graphs {
+            position: absolute;
+            opacity: $initState;
+        }  
+
+        // .line {
+        //     fill: none;
+        //     stroke: url(#line-gradient);
+        //     stroke-width: 2px;
+        // }
+
+        .area {
+            fill: none;
+            // fill: url(#area-gradient);
+            stroke: url(#line-gradient);
+            stroke-width: 2px;
+            // stroke-width: 1px;
+        }
+
+
+        /*** Graph Animations ***/
+
+        $cycleDuration: 40s;
+        // $cycleDuration: 20s;
+        // $metricDuration: 20s;
+
+        // .brand-title:nth-child(1) {
+        //     animation: eefade $cycleDuration 0s infinite;
+        // }
+
+        .loader.graphs {
+        //     // END TO END GRAPHS
+        //     .e-to-e:nth-child(1) {
+        //         animation: eefade $cycleDuration 0s infinite;
+        //     }
+
+        //     .e-to-e:nth-child(2) {
+        //         animation: eefade $cycleDuration 10s infinite;
+        //     }
+
+            // BRANDS GRAPHS
+            // .brands-data:nth-child(1) .brand-title2:nth-child(1) {
+            //     animation: xfade $cycleDuration 0s infinite;
+            // }
+
+            // .brands-data:nth-child(2) .brand-title2:nth-child(2) {
+            //     animation: xfade $cycleDuration 20s infinite;
+            // }
+
+            // .brands-data:nth-child(1) .client-metrics:nth-child(3) {
+            //     // animation: xfade $cycleDuration 0s infinite;
+            //     animation: xfade $cycleDuration 0s infinite;
+            // }    
+
+            // .brands-data:nth-child(2) .client-metrics:nth-child(3) {
+            //     animation: xfade $cycleDuration 20s infinite;
+            // }
+
+            // // LOAD TIME GRAPHS
+            // .time-graph:nth-child(1) .loadtime-graphs:nth-child(1) {
+            //     animation: xfade $cycleDuration 0s infinite;
+            // }
+
+            // .time-graph:nth-child(2) .loadtime-graphs:nth-child(1) {
+            //     animation: xfade $cycleDuration 20s infinite;
+            // }
+        }
+
+        @keyframes xfade {
+            0% {
+                opacity: 1;
+            }
+            10% {
+                opacity: 1;
+            }
+            20% {
+                opacity: 1;
+            }
+            30% {
+                opacity: 1;
+            }        
+            40% {
+                opacity: 1;
+            }             
+            50% {
+                opacity: 0;
+            }
+            60% {
+                opacity: 0;
+            }
+            70% {
+                opacity: 0;
+            } 
+            80% {
+                opacity: 0;
+            } 
+            90% {
+                opacity: 0;
+            }                
+            100% {
+                opacity: 0;
+            }
+        }
+
+        // @keyframes eefade {
+        //     20% {
+        //         opacity: 1;
+        //     }       
+        //     50% {
+        //         opacity: 1;
+        //     }  
+        //     80% {
+        //         opacity: 0;
+        //     }
+        //     90% {
+        //         opacity: 0;
+        //     }
+        // }   
+    }
+}
+
+
+/*** Configuration Settings Page ***/
+
+article#self-service, article#global-settings {
+    .configuration {
+        text-align: center;
+        width: 585px;
+        margin-left: auto;
+        margin-right: auto;
+        color: #000;
+        position: relative;
+
+        .config-title { 
+            color: #000;           
+            // margin-top: 10%;
+        }
+
+        aside.sel-panel {
+            width: 150px;
+            position: absolute;
+            top: 63px;
+            left: -150px;
+            border: 1px solid black;
+            border-radius: 3px;
+            padding: 10px;
+            text-align: center;
+            background-color: #777;
+            // margin-left: 0;
+            // margin-right: 0;
+            // left: auto;
+            // right: auto;
+
+            .group-panel {
+                width: 130px;                
+                text-align: right;
+                margin-bottom: 5px;
+            }
+
+            .group-panel.last {
+                margin-bottom: 0;
+            }
+
+            .btn-panel {
+                white-space: normal;
+                width: 110px;   
+                background-color: #CCC;            
+            }
+
+            .btn-panel.active {
+                background-color: #525151;
+                color: #fff;
+            }
+            .btn-panel:hover {
+                background-color: #525151;
+                color: #fff;
+            }
+        }
+
+        .config-body {
+            position: relative;
+            margin-top: 5%;
+            padding: 0 14px;
+            border: 2px solid black;
+            border-radius: 5px;
+            box-shadow: -2px 3px 15px #048;
+            background-color: #f3f3ef;
+        } 
+
+        @mixin width-margin {
+            display: inline-block;
+            // margin-bottom: 20px;
+            margin-left: 25px;
+        }
+        
+        .field {
+            float: right;
+            // width: 140px;
+            position: relative;
+        }
+
+        select.drop-select {
+            border: 1px solid gray;
+            width: 131px;
+        }
+
+        .threshold {
+            @include width-margin;
+            text-align: left;        
+
+            input {
+                width: 70px;
+                border-radius: 5px;
+            }
+        }
+
+        #graph-group {
+            margin-right: 5px;
+        }
+
+        .datasource {
+            @include width-margin;
+            text-align: left;
+        }
+
+        .edit {
+            position: absolute;
+            left: 15px;
+        }
+
+        .action {
+            text-align: center;
+
+            input {
+                margin: 5px 15px 0;
+            }
+        }
+
+        .inputs {
+            display: inline-block;
+            // width: 40px;
+            text-align: right;
+        } 
+
+        div.modal-footer {
+
+            position: relative;
+            
+            .goto-graphs {
+                position: absolute;
+                left: 0;
+            }
+        }
+
+        section#main-settings {            
+            label {
+                float: left;
+                text-align: left;
+                margin-right: 25px;
+                margin-bottom: 0px;
+            }
+
+            label.text {
+                width: 160px;
+            }
+
+            .scroller {
+                position: relative;
+                display: inline-block;
+                width: 131px;
+                border-radius: 3px;
+                border: 1px solid black;
+                line-height: 0;
+                // cursor: pointer;
+            }
+            
+            .btn-scroll {
+                display: inline-block;
+                width: 65.5px;
+                height: 20px;
+                border-radius: 2px;                
+                line-height: 1.3;                
+                text-align: center;                
+                transition: transform 2s background-color 2s;
+            }
+
+            @mixin toggleButton {
+                transform: translateX(65px);
+            }
+
+            .anime-on {
+                background-color: blue;
+                color: #fff;
+            }
+
+            .anime-off {   
+                @include toggleButton;             
+                background-color: #BDBDBD;
+            }
+
+            .color-light {
+                background-color: #CECEC7;
+                color: #000;
+            }
+
+            .color-dark {   
+                @include toggleButton;             
+                background-color: #2b2b2b;
+                color: #fff;
+            }
+
+            .calc-client {
+                background-color: blue;
+                color: #fff;
+            }
+
+            .calc-server {   
+                @include toggleButton;             
+                background-color: green;
+                color: #fff;
+            }
+
+            .timer-slider, .sla-slider, .thresh-slider {
+                display: inline-block;
+                width: 13px;
+                height: 15px;
+                border-radius: 2px;
+                line-height: 1.8;
+                background-color: blue; 
+            }
+            
+            .scroller.timer {
+                width: 75px;
+            }
+
+            .scroller.sla {
+                width: 65px;
+            } 
+
+            .scroller.thresh {
+                width: 65px;
+            }
+
+            .text-timer, .text-sla, .text-thresh {
+                position: relative;
+                display: inline-block;
+                text-align: right;
+                width: 20px;
+                top: -4px;
+            }  
+
+            .left-arrow, .right-arrow {
+                top: -1px;
+                cursor: pointer;
+            }
+
+            .row {
+                border: 1px solid #000;
+                padding: 20px;
+            }   
+
+            .error-failed {
+                color:red;
+                position:absolute;
+                right: 165px;
+            } 
+        }
+
+        section#editable-names {
+            @mixin common-names($addonWidth) {
+                width: 250px;
+
+                span.addon-width {
+                    width: $addonWidth;
+                }
+            }
+
+            padding: 15px;
+
+            .brand-names {
+                @include common-names(70px);
+                .input-group {
+                    width: 100%;
+                }
+                float: left;
+            }
+
+            .metric-names {
+                @include common-names(105px);
+                float: right;
+            }         
+        }   
+
+        section#graph-rows {
+            padding: 15px;
+
+            label {
+                display: block;
+                cursor: pointer;
+            }
+
+            .graph-img, .text {
+                margin-left: 30px;
+            }
+
+            .graph-row:nth-child(1n+2) {
+                margin-top: 20px;
+            }
+
+            .graph-row:hover, .graph-row.checked {
+                border: 1px solid #ffa500;
+            }
+        }    
+    }
+}
+
+
+/*** Graphite Form ***/
+
+article#graphiteDS {
+    // width: 90%;
+    text-align: left;
+
+    h4 {
+        color: blue;
+        display: inline-block;
+    }
+
+    button {
+        float: right;
+    }
+
+    hr {
+        border-top: 1px dotted #463e3e;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    hr.short {
+        margin-left: 0;
+        width: 50%;
+    }
+
+    input[type='checkbox'] {
+        float: right;
+        margin-right: 40px;
+    }
+
+    label.block {
+        display: inline-block;
+        width: 100%;        
+
+        input, textarea {
+            width: 100%;
+        }
+    }
+
+    .no-float {
+        float: none;        
+    }
+
+    .margin-top-sm {
+        margin-top: 5px;
+    }
+
+    .margin-bottom-md {
+        margin-bottom: 15px;
+    }
+
+    .margin-bottom-sm {
+        margin-bottom: 7px;
+    }
+
+    .error-msg {
+        display: inline-block;
+        width: 100%;
+        color: red;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .save-result, .add-mon-result {
+        margin-left: 10px;
+    }
+
+    .save-result.success, .add-mon-result.success {
+        color: green;
+    }
+
+    .save-result.fail, .add-mon-result.fail {
+        color: red;
+    }
+
+    .mon-row {
+        padding-left: 5px;
+        border-bottom: 1px solid #5bc0de;
+    }
+
+    .mon-row:hover {
+        // border: 0.5px solid #C7C6A2;
+        background-color: #E6E137;
+    }
+
+    .add-monitor {
+        padding: 20px;
+        background-color: #C7C7C1;
+
+        label:nth-child(n+2) {
+            margin-top: 10px;
+        }        
+
+        .row {
+            border: 0 !important;
+            padding-top: 5px !important;
+        }
+    }
+}
+
+
+/*** About Page ***/
+
+article#about {
+    text-align: center;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+
+    p {
+        font-size: 20px;
+    }
+
+    h2 {
+        color: #316da1;
+    }
+
+    .brand-name {
+        display: inline-block;
+        width: 300px;
+    }
+
+    .brand-links {
+        font-size: 15px;
+
+        .brand-alias {
+            color: blanchedalmond;
+        }
+    }
+}
+
+

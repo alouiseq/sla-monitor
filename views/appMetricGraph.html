@@ -1,0 +1,148 @@
+<section id="slam-graphs">
+    <div class="d3-projects animate" ng-show="loaded">
+        <div ng-if="!activateAnime">
+            <button type="button" title="get fresh data" class="slider-fresh btn btn-default btn-xs" aria-label="Right arrow" ng-click="manualTransition(false)">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            </button>
+            <button type="button" title="use cache data" class="slider-stale btn btn-default btn-xs" aria-label="Right arrow" ng-disabled="!cacheAvail" ng-click="manualTransition(true)">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <!-- Fresh Data -->
+        <div class="loader fresh graph-set-{{index}}" ng-show="!cacheTriggered">
+            <div class="end-to-end" ng-if="activeE2E">
+                <div id="{{$index}}" class="e-to-e" ng-if="brand.brandName == 'SFLY' || brand.brandName == 'TP'" ng-repeat="brand in brandsData">
+                    <h1 class="brand-title" ng-show="brand.brandName === 'SFLY'">Shutterfly</h1>
+                    <h1 class="brand-title" ng-show="brand.brandName === 'TP'">TinyPrints</h1>
+                    <div class="viewDaysE-{{brand.brandName}}">
+                       <h4 class="title">{{brand.brandName + ': End-to-End SLAs (7 days)'}}</h4>
+                    </div>
+                    <div class="viewHoursE-{{brand.brandName}}">
+                       <h4 class="title">{{brand.brandName + ': End-to-End SLAs (24 hours)'}}</h4>
+                    </div>
+                    <div class="viewMinutesE-{{brand.brandName}}">
+                       <h4 class="title">{{brand.brandName + ': End-to-End SLAs (60 min)'}}</h4>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="app-metrics">            
+                <div class="brands-data {{brand.brandName | lowercase}}" ng-repeat="brand in brandsData">
+                    <div id="{{$index}}" class="client-metrics {{brand.brandName | lowercase}}-{{metrics.clientMetric | lowercase}}" ng-repeat="metrics in brand.appMetrics">
+                        <h1 class="title-label" ng-if="brand.brandName === 'SFLY'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'TP'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'TL'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'WPD'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'MYPUB'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'BL'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'Mobile'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <h1 class="title-label" ng-if="brand.brandName === 'SBS'">
+                            {{metrics.editableBrandName}} - 
+                            <span class="sub-label">{{metrics.editableMetricName}}</span>
+                        </h1>
+                        <!-- <h4 class="title-label" ng-if="metrics[viewOne.viewType].clientMetric === 'HOMEPAGE'">
+                            Home Page
+                        </h4> -->
+                        <div class="viewDays-{{brand.brandName}}-{{metrics.clientMetric}}">                            
+                            <h4 class="title">({{viewOne.subTitle}})</h4>
+                        </div>
+                        <div class="viewHours-{{brand.brandName}}-{{metrics.clientMetric}}">
+                            <h4 class="title">({{viewTwo.subTitle}})</h4>
+                        </div>
+                        <div class="viewMinutes-{{brand.brandName}}-{{metrics.clientMetric}}">
+                            <h4 class="title">({{viewThree.subTitle}})</h4>
+                        </div>
+                        <div class="reference">
+                            <h6>Threshold: <span class="thresholds">{{ metrics.thresholdTime / 1000 }}s</span> - SLA: <span class="thresholds">{{metrics.thresholdSLA}}%</span></h6>
+                            <h6 class="colors" ng-if="primary === 'true'"><span class="green">SLA Met</span> - <span class="red">SLA Missed</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="load-time" ng-show="index === '0'">
+            <!-- <div class="load-time" ng-show="graphRows === 1"> -->
+                <div class="time-graph {{brand.brandName | lowercase}}" ng-repeat="brand in brandsData">
+                    <div id="{{$index}}" class="loadtime-graphs line-graph-{{brand.brandName}}-{{metrics.clientMetric}} {{brand.brandName | lowercase}}-{{metrics.clientMetric | lowercase}}" ng-show="graphRows === 1 || metrics.monitor.allowLoadTimeGraph" ng-repeat="metrics in brand.appMetrics">
+                        <h4 class="title">Load Time vs. Last Hour</h4>
+                        <h4 class="sub-title">{{metrics[viewThree.viewType].brand + ': ' + metrics[viewThree.viewType].clientMetric}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cached Data -->
+        <div class="loader cached graph-set-{{index}}" ng-show="cacheTriggered">
+            <div class="app-metrics">            
+                <div class="brands-data {{brand.brandName | lowercase}}" ng-repeat="brand in cached">
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'SFLY'">Shutterfly</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'TP'">TinyPrints</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'TL'">ThisLife</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'WPD'">Wedding Paper Divas</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'MYPUB'">My Publisher</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'BL'">BorrowLenses</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'Mobile'">Mobile</h1>
+                    <h1 class="brand-title2" ng-if="!activeE2E && brand.brandName === 'SBS'">SBS</h1>
+                    <div id="{{$index}}" class="client-metrics {{brand.brandName | lowercase}}-{{metrics.clientMetric | lowercase}}" ng-repeat="metrics in brand.appMetrics">
+                        <div class="viewDays-{{brand.brandName}}-{{metrics.clientMetric}}">
+                            <h4 class="title">{{metrics['view7'].brand + ': ' +  metrics['view7'].clientMetric}} SLAs (7 days)</h4>
+                        </div>
+                        <div class="viewHours-{{brand.brandName}}-{{metrics.clientMetric}}">
+                            <h4 class="title">{{metrics['view24'].brand + ': ' +  metrics['view24'].clientMetric}} SLAs (24 hours)</h4>
+                        </div>
+                        <div class="viewMinutes-{{brand.brandName}}-{{metrics.clientMetric}}">
+                            <h4 class="title">{{metrics['view60'].brand + ': ' +  metrics['view60'].clientMetric}} SLAs (60 min)</h4>
+                        </div>
+                        <div class="reference">
+                            <h6>Threshold: <span class="thresholds">{{ metrics.thresholdTime | limitTo : 2 }}s</span> - SLA: <span class="thresholds">{{metrics.thresholdSLA}}%</span></h6>
+                            <h6 class="colors" ng-if="primary === 'true'"><span class="green">SLA Met</span> - <span class="red">SLA Missed</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="load-time">
+                <div class="time-graph {{brand.brandName | lowercase}}" ng-repeat="brand in cached">
+                    <div id="{{$index}}" class="loadtime-graphs line-graph-{{brand.brandName}}-{{metrics.clientMetric}} {{brand.brandName | lowercase}}-{{metrics.clientMetric | lowercase}}" ng-repeat="metrics in brand.appMetrics">
+                        <h4 class="title">Load Time vs. Last Hour</h4>
+                        <h4 class="sub-title">{{metrics['view24'].brand + ': ' + metrics['view24'].clientMetric}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="brands" ng-if="activeBrands">
+            <div id="brand-{{brand}}" class="brand-status" ng-class="{'up': brandsData[brand].data.passed == 0, 'down': !brandsData[brand].data.passed != 1 }" ng-repeat="brand in brands track by $index">{{brand}}</div>
+        </div>
+    </div>
+    <div class="loading-wrapper">
+        <div class="throbber-loader" ng-show="!loaded && isData">Loading...</div>
+    </div>
+    <!-- <div class="no-data" ng-if="!isData">
+        <h1>No Data Available</h1>
+    </div> -->
+</section>

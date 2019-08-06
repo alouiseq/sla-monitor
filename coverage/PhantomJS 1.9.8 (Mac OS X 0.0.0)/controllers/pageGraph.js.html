@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for controllers/pageGraph.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">controllers/pageGraph.js</span></h1>
+    <h2>
+        Statements: <span class="metric">25% <small>(26 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">8.51% <small>(4 / 47)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">27.27% <small>(3 / 11)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">25% <small>(26 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">controllers/</a> &#187; pageGraph.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">define(['angular'], function (angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc function
+     * @name slamApp.controller:PageGraphCtrl
+     * @description Groups all monitors and controls the number of graphs displayed on a view
+     * # PageGraphCtrl
+     * Controller of the slamApp
+     */
+    angular.module('controllers.PageGraphCtrl', [])
+        .controller('PageGraphCtrl', function ($scope, $routeParams, $timeout, ClientService, ConfigService, response) {
+&nbsp;
+            /*** DEFAULTS ***/
+            
+            $scope.rowContainers = [];      // holds each row's graph set
+            $scope.rowBrandCount = [];      // holds each row's graph set
+            $scope.rowsReadyState = 0;      // holds number of rows with at least one data
+&nbsp;
+&nbsp;
+            /*** PRIVATE METHODS ***/
+&nbsp;
+            // Prepare monitors to be grouped and displayed on the page
+            function getMonitors () {
+                var monitorRegEx = /SLAM_(\w+)_(\w+)/;
+                var brand = $routeParams.brand;
+                var monitors;
+&nbsp;
+                // Get all active SLAM monitors or specific monitors based on brand                     
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (!ConfigService.getMock()) {                                    
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (brand) {
+<span class="cstat-no" title="statement not covered" >                        $scope.viewOneBrand = true; </span>         // check if only a single brand is monitored
+<span class="cstat-no" title="statement not covered" >                        brand = brand.toLowerCase();</span>
+&nbsp;
+                        // Specify view based on brands
+<span class="cstat-no" title="statement not covered" >                        monitors = response.data.monitors.filter(<span class="fstat-no" title="function not covered" >function (mon) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            if (brand === monitorRegEx.exec(mon.name)[1].toLowerCase()) {</span>
+<span class="cstat-no" title="statement not covered" >                                return mon;</span>
+                            }
+                        });
+&nbsp;
+                        // Add easy to read monitor name that can be configured by the user
+                        // monitors = monitors.map(function (mon, index) {
+                        //     mon.editableName = mon.name;
+                        // });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (monitors.length &lt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >                            monitors = response.data.monitors;</span>
+<span class="cstat-no" title="statement not covered" >                            $scope.viewOneBrand = false;</span>
+                        }   
+                    } else {
+                        $scope.viewOneBrand = false;
+&nbsp;
+                        // // Check for user customization on graph placement
+                        // if ($scope.graphRows &gt;= 1) {
+                        //     var count = 0;
+&nbsp;
+                        // } else {
+                            monitors = response.data.monitors;
+                        // }
+                    }                                                           
+                } else {    // mock data
+<span class="cstat-no" title="statement not covered" >                    monitors = _.filter(response.data.monitors, <span class="fstat-no" title="function not covered" >function (mon, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (mon.monitor_id === '5a1c2ab6588c11e592489848e1660ab3' || mon.monitor_id === '555272e66bb611e58f4a002655ec6e4f' || mon.monitor_id === 'a14f118a6bbc11e5bbb8002655ec6e4f' || mon.monitor_id === '21e85880588d11e5b2309848e1660ab3' || mon.monitor_id === '23f5556e6bb711e585b3002655ec6e4f') {</span>
+<span class="cstat-no" title="statement not covered" >                            return mon;</span>
+                        }
+                    });
+                }
+&nbsp;
+                // Initial data: SFLY should be the first array element if it exists
+                var sflyIndex = _.indexOf(monitors, _.findWhere(monitors, {monitor_id: '5a1c2ab6588c11e592489848e1660ab3'}));
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (sflyIndex &gt; -1) {
+                    monitors.unshift((monitors.splice(sflyIndex, 1))[0]);
+                }
+&nbsp;
+                // Store based on user preference
+                <span class="missing-if-branch" title="if path not taken" >I</span>if ($scope.graphRows &gt; 1) {
+<span class="cstat-no" title="statement not covered" >                    groupMonitors(monitors);</span>
+                } else {
+                    $scope.rowContainers.push(monitors);
+                }
+&nbsp;
+                // $scope.$broadcast('get-monitors', monitors, viewOne);                            
+            }
+&nbsp;
+            // Group monitors to be displayed on each page transition based on user preferences
+<span class="fstat-no" title="function not covered" >            function groupMonitors (monitors) {</span>
+<span class="cstat-no" title="statement not covered" >                var hash = {</span>
+                    'brandKeys': {}
+                };
+<span class="cstat-no" title="statement not covered" >                var updatedMons = [];</span>
+<span class="cstat-no" title="statement not covered" >                var monitorRegEx = /SLAM_(\w+)_(\w+)/;</span>
+<span class="cstat-no" title="statement not covered" >                var count = 0;</span>
+<span class="cstat-no" title="statement not covered" >                var row;</span>
+<span class="cstat-no" title="statement not covered" >                var prevBrand = null;</span>
+<span class="cstat-no" title="statement not covered" >                var emptyIter = 0;</span>
+&nbsp;
+                // Prepare containers
+<span class="cstat-no" title="statement not covered" >                while (count++ &lt; $scope.graphRows) {</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.rowContainers.push([]);</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.rowBrandCount.push(0);</span>
+                }
+&nbsp;
+                // Store monitors and their metadata in hash table to group metrics based on brand
+<span class="cstat-no" title="statement not covered" >                monitors.forEach(<span class="fstat-no" title="function not covered" >function (mon) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    var monitorName = mon.name;</span>
+<span class="cstat-no" title="statement not covered" >                    var brand = (monitorRegEx.exec(monitorName)[1]).toUpperCase();</span>
+                                        
+<span class="cstat-no" title="statement not covered" >                    if (monitorRegEx.exec(monitorName)) {</span>
+<span class="cstat-no" title="statement not covered" >                        var brand = (monitorRegEx.exec(monitorName)[1]).toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >                        mon.brand = brand;</span>
+&nbsp;
+                        // Insert into hash table
+<span class="cstat-no" title="statement not covered" >                        if (hash[brand]) {</span>
+<span class="cstat-no" title="statement not covered" >                            hash[brand].push(mon);</span>
+<span class="cstat-no" title="statement not covered" >                            hash['brandKeys'][brand]++;</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            hash[brand] = [mon];</span>
+<span class="cstat-no" title="statement not covered" >                            hash['brandKeys'][brand] = 0;</span>
+                        }
+                    }                                       
+                }); 
+&nbsp;
+                // Store grouped monitors into an array
+<span class="cstat-no" title="statement not covered" >                for (var mon in hash) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (mon !== 'brandKeys') {</span>
+<span class="cstat-no" title="statement not covered" >                        updatedMons = updatedMons.concat(hash[mon]);</span>
+                    }
+&nbsp;
+                }
+&nbsp;
+                // Use user selected rows and number of monitors to calculate the amount necessary to ensure proper display of graphs
+<span class="cstat-no" title="statement not covered" >                var brandInHash;</span>
+<span class="cstat-no" title="statement not covered" >                for (var brand in hash['brandKeys']) {</span>
+<span class="cstat-no" title="statement not covered" >                    brandInHash = hash['brandKeys'][brand];</span>
+<span class="cstat-no" title="statement not covered" >                    if (brandInHash &lt;= $scope.graphRows) {</span>
+<span class="cstat-no" title="statement not covered" >                        hash['brandKeys'][brand] = $scope.graphRows;</span>
+                    } else {    // brandInHash &gt; user rows
+<span class="cstat-no" title="statement not covered" >                        if (brandInHash &gt; (hash['brandKeys'][brand] = $scope.graphRows * 2)) {</span>
+<span class="cstat-no" title="statement not covered" >                            hash['brandKeys'][brand] = $scope.graphRows * 3;</span>
+                        }
+                    }
+                }                
+                
+<span class="cstat-no" title="statement not covered" >                count = 0;</span>
+<span class="cstat-no" title="statement not covered" >                row = 0;</span>
+<span class="cstat-no" title="statement not covered" >                emptyIter = 0;</span>
+<span class="cstat-no" title="statement not covered" >                prevBrand = updatedMons[count].brand;</span>
+&nbsp;
+                // This will generate the list of monitors to be displayed on the page along with the specified rows
+&nbsp;
+                // BRAND group logic not yet implemented!
+<span class="cstat-no" title="statement not covered" >                if ($scope.graphGroupBy === 'brand') {</span>
+<span class="cstat-no" title="statement not covered" >                    for (var monKey in hash) {</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.rowContainers[brandCount] = $scope.rowContainers[brandCount].concat(hash[monKey]);</span>
+<span class="cstat-no" title="statement not covered" >                        brandCount++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (brandCount &gt;= $scope.graphRows) {</span>
+<span class="cstat-no" title="statement not covered" >                            brandCount = 0;</span>
+                        }    
+                    }     
+                } else {        // groupBy: metric
+<span class="cstat-no" title="statement not covered" >                    while (count &lt; updatedMons.length) {                        </span>
+<span class="cstat-no" title="statement not covered" >                        if (row &gt;= $scope.graphRows) {</span>
+<span class="cstat-no" title="statement not covered" >                            row = 0;</span>
+<span class="cstat-no" title="statement not covered" >                            prevBrand = updatedMons[count].brand;</span>
+                        } 
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (prevBrand === updatedMons[count].brand) {</span>
+<span class="cstat-no" title="statement not covered" >                            $scope.rowContainers[row].push(updatedMons[count++]);</span>
+<span class="cstat-no" title="statement not covered" >                            $scope.rowBrandCount[row] = $scope.rowBrandCount[row] + 1;</span>
+                        
+                            // controls load time graph view - iterates over each data
+<span class="cstat-no" title="statement not covered" >                            if (row === 1) {</span>
+<span class="cstat-no" title="statement not covered" >                                emptyIter++;</span>
+                            } 
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            $scope.rowContainers[row].push({});</span>
+&nbsp;
+                            // controls load time graph view -
+                            // allow in row0 view if rows &gt; 0 have empty missing monitor transition                          
+<span class="cstat-no" title="statement not covered" >                            if (row === 1) {</span>
+<span class="cstat-no" title="statement not covered" >                                $scope.rowContainers[0][emptyIter++].allowLoadTimeGraph = true;</span>
+                            }                         
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        row++;</span>
+                    }
+&nbsp;
+                    // Fill in remaining unused rows with {}
+<span class="cstat-no" title="statement not covered" >                    while (row &lt; $scope.graphRows) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (row === 1) {</span>
+<span class="cstat-no" title="statement not covered" >                            $scope.rowContainers[0][emptyIter++].allowLoadTimeGraph = true;</span>
+                        } 
+<span class="cstat-no" title="statement not covered" >                        $scope.rowContainers[row++].push({});                        </span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    rowDataAccumulator();                    </span>
+                }     
+            }
+&nbsp;
+            // Transition logic only applicable to rows with data
+<span class="fstat-no" title="function not covered" >            function rowDataAccumulator () {</span>
+<span class="cstat-no" title="statement not covered" >                $scope.rowBrandCount.forEach(<span class="fstat-no" title="function not covered" >function (elem) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (elem &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        $scope.rowsReadyState++;</span>
+                    }
+                });
+            }
+&nbsp;
+&nbsp;
+            /*** LISTENERS ***/
+&nbsp;
+            // Check if all rows are ready for the next transition
+            $scope.$on('isReady', <span class="fstat-no" title="function not covered" >function (e, index) {</span>
+<span class="cstat-no" title="statement not covered" >                if (--$scope.rowsReadyState &lt;= 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    rowDataAccumulator();</span>
+                    // Apply delay to ensure functions have returned
+<span class="cstat-no" title="statement not covered" >                    $timeout(<span class="fstat-no" title="function not covered" >function () {</span></span>
+<span class="cstat-no" title="statement not covered" >                        $scope.$broadcast('nowReady');</span>
+                    });                    
+                }
+            });
+&nbsp;
+&nbsp;
+            /*** INITIALIZE ***/
+            
+            // Get graph display and placement options
+            $scope.graphRows = ConfigService.getGraphRows();            
+            $scope.graphGroupBy = ConfigService.getGroupBy(); 
+&nbsp;
+            // Get monitors from service
+            getMonitors();           
+&nbsp;
+            // Get all views and their helper data
+            $scope.viewHelpers = ConfigService.getViewHelpers();
+&nbsp;
+            // Get all brands data
+            $scope.brandsData = ClientService.getBrands();
+            
+        });
+});
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Feb 17 2016 12:28:58 GMT-0800 (PST)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

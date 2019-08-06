@@ -1,0 +1,5 @@
+<app-metric-graph index="{{$index}}" graph-rows="graphRows" view-one="viewHelpers[0]" view-two="viewHelpers[1]" view-three="viewHelpers[2]" monitors="monitors" view-one-brand-in-row="{{rowBrandCount[$index] === 1}}" view-one-brand="{{viewOneBrand}}" primary="{{$index === 0}}" ng-repeat="monitors in rowContainers"></app-metric-graph>
+
+<div class="no-data" ng-if="rowContainers.length <= 0">
+    <h1>No Data Available</h1>
+</div>

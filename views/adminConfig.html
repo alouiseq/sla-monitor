@@ -1,0 +1,43 @@
+<article id="global-settings">
+    <div class="configuration">
+        <div class="config-title">
+            <h2>Global Settings</h2>
+        </div>        
+        <div class="config-body">
+            <form class="settings">
+                <section id="main-settings">                     
+                    <div class="row">
+                        <label for="ttime" class="text">Threshold Time: </label>
+                        <span class="error-failed" ng-if="!threshSaved"><em>Failed to save!</em></span>
+                        <div class="threshold field">
+                            <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderThresh('down')" ng-mouseup="setThresholdDelay()"></span>    
+                            <div class="scroller thresh">
+                                <div class="thresh-slider"></div>                                                        
+                            </div>
+                            <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderThresh('up')" ng-mouseup="setThresholdDelay()"></span>
+                            <span class="text-thresh">{{thresholdTime}}s</span>                                                      
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="tsla" class="text">Threshold SLA: </label>
+                        <span class="error-failed" ng-if="!slaSaved"><em>Failed to save!</em></span>
+                        <div class="threshold field">
+                            <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderSLA('down')" ng-mouseup="setSLA()"></span>    
+                            <div class="scroller sla">
+                                <div class="sla-slider"></div>                                                        
+                            </div>
+                            <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderSLA('up')" ng-mouseup="setSLA()"></span>
+                            <span class="text-sla">{{thresholdSLA}}%</span>                        
+                        </div>
+                    </div>                                     
+                </section>                            
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default goto-graphs" data-dismiss="modal" ng-if="!isEdit" ng-click="goToGraphs()">Go Back to Graphs</button>
+            <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" ng-if="!isEdit" ng-click="edit()">Edit</button>
+            <button type="button" class="btn btn-primary" ng-if="isEdit" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-success" ng-click="goToGraphs()">Save changes</button> -->
+        </div>
+    </div>
+</article>

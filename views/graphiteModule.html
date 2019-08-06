@@ -1,0 +1,59 @@
+<article id="graphiteDS" ng-if="dataSource.name === 'Graphite'">
+    <form class="select-monitors">
+        <h4>Select Monitors to View</h4>
+        <span class="save-result" ng-class="{'success': savedView == 'saved', 'fail': savedView == 'failed'}"><em>{{savedView}}</em></span>
+        <button class="btn btn-primary margin-top-sm" ng-click="saveMonitorsView()">Save</button>
+        <hr class="short" />
+        <div class="form-group mon-row clearfix" ng-repeat="monitor in activeMonitors track by $index">
+            <label for="mon-{{monitor.id}}" class="pointer"><em>{{monitor.name}}</em></label>
+            <input id="mon-{{monitor.id}}" class="pointer" type="checkbox" name="mons" ng-model="monitor.selected" />
+        </div>
+        <span class="error-msg" ng-if="noActiveMons"><em>No monitors available!</em></span>
+    </form>
+    <button class="btn btn-info no-float margin-bottom-md" ng-if="!showAddMonForm" ng-click="addMonitorView()">Add Monitor</button>
+    <span class="add-mon-result success" ng-if="monitorAdded && !showAddMonForm"><em>Monitor added</em></span>
+    <!-- <hr ng-if="showAddMonForm" />     -->
+    <form class="add-monitor" ng-show="showAddMonForm">
+        <h4>Add Monitor <em>(optional)</em></h4>
+        <button class="btn btn-warning btn-xs no-float margin-bottom-sm" ng-click="toggleAddView()">Close</button>
+        <span class="add-mon-result fail" ng-if="!monitorAdded && triedToAddMon"><em>Failed to add monitor!</em></span>
+        <button class="btn btn-primary" ng-click="addMonitor()">Add</button>
+        <hr class="short" />
+        <div class="form-group clearfix">
+            <label for="checkActive">
+                Active:&nbsp;&nbsp;
+                <input id="checkActive" type="checkbox" ng-model="newMonitor.active" />
+            </label>            
+            <label class="name block">
+                Target:
+                <input type="text" required placeholder="sfly.prod.pool.slam.poller_worker.sample" ng-model="newMonitor.name" />
+            </label>
+            <label class="desc block">
+                Description:
+                <textarea required placeholder="Describe the metric and what it checks" ng-model="newMonitor.description"></textarea>
+            </label>
+        </div>            
+        <div class="row">
+            <label for="ttime" class="text">Threshold Time: </label>
+            <div class="threshold field">
+                <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderThresh('down')" ng-mouseup="stopInterval()"></span>    
+                <div class="scroller thresh">
+                    <div class="thresh-slider"></div>                                                        
+                </div>
+                <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderThresh('up')" ng-mouseup="stopInterval()"></span>
+                <span class="text-thresh">{{newMonitor.threshold}}s</span>                                                      
+            </div>
+        </div>
+        <div class="row">
+            <label for="tsla" class="text">Threshold SLA: </label>
+            <div class="threshold field">
+                <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderSLA('down')" ng-mouseup="stopInterval()"></span>    
+                <div class="scroller sla">
+                    <div class="sla-slider"></div>                                                        
+                </div>
+                <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderSLA('up')" ng-mouseup="stopInterval()"></span>
+                <span class="text-sla">{{newMonitor.sla}}%</span>                        
+            </div>
+        </div>                        
+    </form>
+</article>

@@ -1,0 +1,146 @@
+<article id="self-service">
+    <div class="configuration">
+        <div class="config-title">
+            <h2>Self Service</h2>
+        </div>
+        <aside class="sel-panel">
+            <div class="group-panel">
+                <button class="btn btn-default btn-panel" ng-class="{active: btnIndex === 0}" ng-click="switchActive(0)">Settings</button>
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            </div>
+            <div class="group-panel">
+                <button class="btn btn-default btn-panel" ng-class="{active: btnIndex === 1}" ng-click="switchActive(1)">Brand/Metric Names</button>
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            </div>
+            <div class="group-panel last">
+                <button class="btn btn-default btn-panel" ng-class="{active: btnIndex === 2}" ng-click="switchActive(2)">Graph Rows</button>
+                <span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+            </div>
+        </aside>
+        <div class="config-body">
+            <form class="settings">
+                <!-- Main Settings --> 
+                <section id="main-settings" ng-show="btnIndex === 0"> 
+                    <div class="row">                       
+                        <label for="ds.name" class="text">Data Source: </label>
+                        <div class="datasource field">
+                            <select class="drop-select field" ng-model="dataSource" ng-change="setDataSource()" ng-options="ds.name for ds in dataSources">
+                            </select>                    
+                        </div>       
+                        <!-- <span style="color:red;position:absolute;" ng-if="isEdit">Work in Progress...</span>                    -->
+                    </div>
+                    <graphite-module></graphite-module>
+                    <div class="row">
+                        <label for="theme" class="text">Theme Color: </label>
+                        <div id="trans-theme" class="threshold field">
+                            <div class="scroller pointer" ng-click="toggleThemeColor()">
+                                <div class="btn-scroll" ng-class="{'color-light': themeColor==='light', 'color-dark': themeColor==='dark'}">
+                                    <span ng-if="themeColor === 'light'">light</span>
+                                    <span ng-if="themeColor === 'dark'">dark</span>
+                                </div>                            
+                            </div>                       
+                        </div> 
+                    </div>                       
+                    <div class="row">
+                        <label for="graph-module" class="text">Calculations Source: </label>
+                        <div id="graph-module" class="threshold field">
+                            <div class="scroller pointer" ng-click="toggleCalcsSource()">                        
+                                <div class="btn-scroll" ng-class="{'calc-client': calcsLoc==='client', 'calc-server': calcsLoc==='server'}">
+                                    <span ng-if="calcsLoc === 'client'">client</span>
+                                    <span ng-if="calcsLoc === 'server'">server</span>
+                                </div>   
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="row">                   
+                        <label for="animate-trans" class="text">Animation Transition: </label>
+                        <div id="animate-trans" class="threshold field">                       
+                            <div class="scroller pointer" ng-click="toggleTransition()">
+                                <div class="btn-scroll" ng-class="{'anime-on': activateAnime, 'anime-off': !activateAnime}">
+                                    <span ng-if="activateAnime">on</span>
+                                    <span ng-if="!activateAnime">off</span>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">                                  
+                        <label for="timer" class="text">Transition Timer: </label>
+                        <div id="trans-timer" class="threshold field">
+                            <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderTimer('down')" ng-mouseup="setTimer()"></span>
+                            <div class="scroller timer">
+                                <div class="timer-slider"></div>                                              
+                            </div>
+                            <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderTimer('up')" ng-mouseup="setTimer()"></span>
+                            <span class="text-timer">{{timer}}s</span>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <label for="ttime" class="text">Threshold Time: </label>
+                        <span class="error-failed" ng-if="!threshSaved"><em>Failed to save!</em></span>
+                        <div class="threshold field">
+                            <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderThresh('down')" ng-mouseup="setThresholdDelay()"></span>    
+                            <div class="scroller thresh">
+                                <div class="thresh-slider"></div>                                                        
+                            </div>
+                            <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderThresh('up')" ng-mouseup="setThresholdDelay()"></span>
+                            <span class="text-thresh">{{thresholdTime}}s</span>                                                      
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label for="tsla" class="text">Threshold SLA: </label>
+                        <span class="error-failed" ng-if="!slaSaved"><em>Failed to save!</em></span>
+                        <div class="threshold field">
+                            <span class="left-arrow glyphicon glyphicon-triangle-left" ng-mousedown="sliderSLA('down')" ng-mouseup="setSLA()"></span>    
+                            <div class="scroller sla">
+                                <div class="sla-slider"></div>                                                        
+                            </div>
+                            <span class="right-arrow glyphicon glyphicon-triangle-right" ng-mousedown="sliderSLA('up')" ng-mouseup="setSLA()"></span>
+                            <span class="text-sla">{{thresholdSLA}}s</span>                        
+                        </div>
+                    </div>             -->                         
+                </section>
+                <!-- Editable Names -->
+                <section id="editable-names" class="clearfix" ng-show="btnIndex === 1">
+                    <div class="brand-names">
+                        <button class="btn btn-info brand-names" ng-click="showBrands = !showBrands">Brand Names</button>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        <div class="input-group" ng-show="showBrands" ng-repeat="brandData in brandNames">
+                            <span class="input-group-addon addon-width">{{brandData.brand}}</span>
+                            <input type="text" class="form-control" ng-model="brandData.name" />
+                        </div>
+                        
+                    </div>
+                    <div class="metric-names">
+                        <button class="btn btn-info brand-names" ng-click="showMetrics = !showMetrics">Metric Names</button>
+                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                        <div class="input-group" ng-show="showMetrics" ng-repeat="metricData in metricNames">
+                            <span class="input-group-addon addon-width">{{metricData.metric}}</span>
+                            <input type="text" class="form-control" ng-model="metricData.name" />
+                        </div>                        
+                    </div>
+                </section>
+                <!-- Graph Rows -->
+                <section id="graph-rows" ng-show="btnIndex === 2">
+                    <label id="{{$index}}" class="graph-row" ng-click="setGraphRows($index)" ng-repeat="graphRow in graphRowsOps">
+                        <input type="radio" name="numRows" />
+                        <img class="graph-img" ng-src="{{graphRow.image}}" alt="{{graphRow.row}} rows" height="100" width="200" />
+                        <span for="graph-module" class="text">{{graphRow.row}} rows</span>
+                    </label>                    
+
+                    <!-- <br ng-if="graphRows > 1" />
+                    <label for="graph-group" ng-class="{'edit-mode': isEdit, 'read-mode': !isEdit}" ng-if="graphRows > 1">Group By: </label>
+                    <div id="graph-group" class="threshold field" ng-if="graphRows > 1" ng-class="{'edit-mode': isEdit, 'read-mode': !isEdit}">
+                        <span class="inputs" ng-if="!isEdit && graphRows > 1" ng-model="groupBy">{{groupBy}}</span>
+                        <select class="drop-select field" ng-class="{'edit-mode': isEdit, 'read-mode': !isEdit}" ng-if="isEdit && graphRows > 1" ng-model="groupBy" ng-change="setGroupBy()" ng-options="groupBy disable when groupBy == 'brand' for groupBy in groups"></select>
+                    </div> -->
+                </section>                              
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default goto-graphs" data-dismiss="modal" ng-if="!isEdit" ng-click="goToGraphs()">Go Back to Graphs</button>
+            <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" ng-if="!isEdit" ng-click="edit()">Edit</button>
+            <button type="button" class="btn btn-primary" ng-if="isEdit" ng-click="cancel()">Cancel</button>
+            <button type="button" class="btn btn-success" ng-click="goToGraphs()">Save changes</button> -->
+        </div>
+    </div>
+</article>
