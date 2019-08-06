@@ -4,7 +4,7 @@ Web application that provides real-time data visualizations of the health of pro
 ### Stack
 Javascript, Angular.js, HTML, CSS, D3, Grunt, Yeoman, Bower, Karma
 
-
+### Note
 This project is generated with [yo angular-require generator](https://github.com/aaronallport/generator-angular-require)
 version 1.0.0.
 
